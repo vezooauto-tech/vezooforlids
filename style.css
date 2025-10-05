@@ -1,1 +1,166 @@
+:root{
+  --bg:#0a0a0a;
+  --card:#111111;
+  --text:#ffffff;
+  --accent:#e4002b;
+  --wa:#25D366;
+  --tg:#0088cc;
+  --vb:#7360F2;
+  --radius:12px;
+  --max:640px;
+  --transition:.25s ease;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
 
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font:inherit;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+  padding:2rem 1rem;
+  -webkit-font-smoothing:antialiased;
+}
+/* ---------- ЛОГО ---------- */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  font-weight:700;
+  font-size:1.5rem;
+  margin-bottom:2.5rem;
+}
+.logo img{
+  height:44px;
+  border-radius:var(--radius);
+}
+/* ---------- КАРТОЧКА ---------- */
+.quiz{
+  max-width:var(--max);
+  margin:auto;
+  background:var(--card);
+  padding:2rem 1.5rem;
+  border-radius:var(--radius);
+  box-shadow:0 8px 40px rgba(228,0,43,.25);
+}
+/* ---------- ШАГИ ---------- */
+.step{
+  display:none;
+  animation:fadeIn .4s ease;
+}
+.step.active{
+  display:block;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+/* ---------- ПОЛЯ ---------- */
+label{
+  display:block;
+  margin-bottom:.5rem;
+  font-weight:600;
+  font-size:.95rem;
+}
+input,select,textarea{
+  width:100%;
+  padding:.85rem 1rem;
+  border:1px solid #333;
+  border-radius:var(--radius);
+  font-size:1rem;
+  background:#000;
+  color:var(--text);
+  transition:border-color var(--transition);
+}
+input:focus,textarea:focus{
+  border-color:var(--accent);
+  outline:none;
+}
+textarea{
+  resize:vertical;
+  min-height:90px;
+}
+/* ---------- RADIO-КАРТОЧКИ ---------- */
+.radio-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-top:.5rem;
+}
+.radio-group label{
+  background:#1a1a1a;
+  padding:.65rem 1rem;
+  border-radius:var(--radius);
+  cursor:pointer;
+  flex:1 1 120px;
+  text-align:center;
+  font-size:.9rem;
+  transition:background var(--transition),color var(--transition);
+}
+.radio-group input[type=radio]{
+  display:none;
+}
+.radio-group input:checked+label{
+  background:var(--accent);
+  color:#fff;
+}
+/* ---------- КНОПКИ ---------- */
+.btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:.9rem 1.5rem;
+  border-radius:var(--radius);
+  font-weight:700;
+  font-size:1.05rem;
+  cursor:pointer;
+  width:100%;
+  transition:filter var(--transition);
+}
+.btn:hover{
+  filter:brightness(1.1);
+}
+/* ---------- ЛИПКИЙ CTA (мобильный) ---------- */
+@media(max-width:600px){
+  .btn{
+    position:sticky;
+    bottom:1rem;
+    z-index:10;
+    box-shadow:0 4px 20px rgba(228,0,43,.4);
+  }
+}
+/* ---------- РЕЗУЛЬТАТ ---------- */
+.result{
+  font-size:1.1rem;
+  margin-bottom:1rem;
+}
+.result b{
+  font-size:1.35rem;
+  color:var(--accent);
+}
+/* ---------- ЧЕК-БОКС ---------- */
+.checkbox{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  margin-top:1rem;
+}
+.checkbox input{
+  width:auto;
+}
+/* ---------- СОЦ. КНОПКИ ---------- */
+.social{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-top:1.5rem;
+}
+.social a{
+  flex:1 1 130px;
+  text-align:center;
+  font-size:.85rem;
+}
