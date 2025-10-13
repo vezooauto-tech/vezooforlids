@@ -1,207 +1,147 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>VezooAuto | Подбор авто из Китая/Кореи</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-  :root{
-    --bg:#0a0a0a;
-    --card:#111111;
-    --text:#ffffff;
-    --accent:#e4002b;
-    --wa:#25D366;
-    --tg:#0088cc;
-    --vb:#7360F2;
-    --radius:12px;
-    --max:640px;
-    --transition:.25s ease;
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;font:inherit}
-  body{background:var(--bg);color:var(--text);line-height:1.5;padding:2rem 1rem;-webkit-font-smoothing:antialiased}
-  .logo{display:flex;align-items:center;gap:.75rem;font-weight:700;font-size:1.5rem;margin-bottom:2.5rem}
-  .logo img{height:44px;border-radius:var(--radius)}
-  .quiz{max-width:var(--max);margin:auto;background:var(--card);padding:2rem 1.5rem;border-radius:var(--radius);box-shadow:0 8px 40px rgba(228,0,43,.25)}
-  .step{display:none;animation:fadeIn .4s ease}.step.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  label{display:block;margin-bottom:.5rem;font-weight:600;font-size:.95rem}
-  input,select,textarea{width:100%;padding:.85rem 1rem;border:1px solid #333;border-radius:var(--radius);font-size:1rem;background:#000;color:var(--text);transition:border-color var(--transition)}
-  input:focus,textarea:focus{border-color:var(--accent);outline:none}
-  textarea{resize:vertical;min-height:90px}
-  .radio-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
-  .radio-group label{background:#1a1a1a;padding:.65rem 1rem;border-radius:var(--radius);cursor:pointer;flex:1 1 120px;text-align:center;font-size:.9rem;transition:background var(--transition),color var(--transition)}
-  .radio-group input[type=radio]{display:none}
-  .radio-group input:checked+label{background:var(--accent);color:#fff}
-  .btn{background:var(--accent);color:#fff;border:none;padding:.9rem 1.5rem;border-radius:var(--radius);font-weight:700;font-size:1.05rem;cursor:pointer;width:100%;transition:filter var(--transition)}
-  .btn:hover{filter:brightness(1.1)}
-  @media(max-width:600px){.btn{position:sticky;bottom:1rem;z-index:10;box-shadow:0 4px 20px rgba(228,0,43,.4)}}
-  .result{font-size:1.1rem;margin-bottom:1rem}.result b{font-size:1.35rem;color:var(--accent)}
-  .checkbox{margin-top:1rem;display:flex;align-items:center;gap:.5rem}.checkbox input{width:auto}
-  .social{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem}.social a{flex:1 1 130px;text-align:center;font-size:.85rem}
-  ul{margin:1rem 0 1.5rem 1.25rem;opacity:.8}
-  </style>
+<meta charset="utf-8">
+<title>VezooAuto | Быстрая заявка</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --card:#111111;
+  --text:#ffffff;
+  --accent:#e4002b;
+  --radius:12px;
+  --max:640px;
+  --transition:.25s ease;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;font:inherit}
+body{background:var(--bg);color:var(--text);line-height:1.5;padding:2rem 1rem;-webkit-font-smoothing:antialiased}
+.quiz{max-width:var(--max);margin:auto;background:var(--card);padding:2rem 1.5rem;border-radius:var(--radius);box-shadow:0 8px 40px rgba(228,0,43,.25)}
+.logo{display:flex;align-items:center;gap:.75rem;font-weight:700;font-size:1.5rem;margin-bottom:1.5rem}
+.logo img{height:44px;border-radius:var(--radius)}
+.step{display:none;animation:fadeIn .4s ease}
+.step.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+label{display:block;margin-bottom:.5rem;font-weight:600;font-size:.95rem}
+input,select,textarea{width:100%;padding:.85rem 1rem;border:1px solid #333;border-radius:var(--radius);font-size:1rem;background:#000;color:var(--text);transition:border-color var(--transition)}
+input:focus,textarea:focus{border-color:var(--accent);outline:none}
+textarea{resize:vertical;min-height:90px}
+.radio-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.radio-group label{background:#1a1a1a;padding:.65rem 1rem;border-radius:var(--radius);cursor:pointer;flex:1 1 120px;text-align:center;font-size:.9rem;transition:background var(--transition),color var(--transition)}
+.radio-group input[type=radio]{display:none}
+.radio-group input:checked+label{background:var(--accent);color:#fff}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.checkbox-group label{background:#1a1a1a;padding:.65rem 1rem;border-radius:var(--radius);cursor:pointer;flex:1 1 120px;text-align:center;font-size:.9rem;transition:background var(--transition),color var(--transition)}
+.checkbox-group input[type=checkbox]{margin-right:.5rem}
+.btn{background:var(--accent);color:#fff;border:none;padding:.9rem 1.5rem;border-radius:var(--radius);font-weight:700;font-size:1.05rem;cursor:pointer;width:100%;transition:filter var(--transition)}
+.btn:hover{filter:brightness(1.1)}
+@media(max-width:600px){.btn{position:sticky;bottom:1rem;z-index:10;box-shadow:0 4px 20px rgba(228,0,43,.4)}}
+#progress{height:4px;background:var(--accent);width:0%;border-radius:var(--radius);transition:width var(--transition);margin-bottom:1.5rem}
+#msg{margin-top:1rem;font-weight:600;text-align:center;opacity:0;transition:opacity .3s}
+#msg.ok{color:#25D366;opacity:1}
+#msg.error{color:#e4002b;opacity:1}
+</style>
 </head>
 <body>
-  <div class="quiz">
-    <div class="logo">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Crect width='42' height='42' rx='8' fill='%23e4002b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-size='22' font-weight='700'%3EV%3C/text%3E%3C/svg%3E" alt="VezooAuto">
-      <span>VezooAuto</span>
-    </div>
-
-    <!-- Шаг 1 Марка и модель -->
-    <div class="step active" id="s1">
-      <label>Марка и модель (можно несколько)</label>
-      <input type="text" id="car" placeholder="Toyota Camry, Kia Sportage">
-      <button class="btn" onclick="next(1)">Далее</button>
-    </div>
-
-    <!-- Шаг 2 Тип кузова -->
-    <div class="step" id="s2">
-      <label>Тип кузова</label>
-      <div class="radio-group">
-        <input type="radio" name="body" value="sedan" id="sedan"><label for="sedan">Седан</label>
-        <input type="radio" name="body" value="suv" id="suv"><label for="suv">Кроссовер/SUV</label>
-        <input type="radio" name="body" value="hatch" id="hatch"><label for="hatch">Хэтчбек</label>
-        <input type="radio" name="body" value="wagon" id="wagon"><label for="wagon">Универсал</label>
-        <input type="radio" name="body" value="mpv" id="mpv"><label for="mpv">Минивэн</label>
-        <input type="radio" name="body" value="any" id="any" checked><label for="any">Неважно</label>
-      </div>
-      <button class="btn" onclick="next(2)">Далее</button>
-    </div>
-
-    <!-- Шаг 3 Год от -->
-    <div class="step" id="s3">
-      <label>Год выпуска (от)</label>
-      <input type="number" id="year" min="1990" max="2025" placeholder="2015">
-      <button class="btn" onclick="next(3)">Далее</button>
-    </div>
-
-    <!-- Шаг 4 Бюджет-диапазон -->
-    <div class="step" id="s4">
-      <label>Бюджет, $</label>
-      <div class="radio-group">
-        <input type="radio" name="budget" value="10-15" id="b1"><label for="b1">10–15k</label>
-        <input type="radio" name="budget" value="15-20" id="b2"><label for="b2">15–20k</label>
-        <input type="radio" name="budget" value="20-25" id="b3"><label for="b3">20–25k</label>
-        <input type="radio" name="budget" value="25-30" id="b4"><label for="b4">25–30k</label>
-        <input type="radio" name="budget" value="30+" id="b5" checked><label for="b5">Свыше 30k</label>
-      </div>
-      <button class="btn" onclick="next(5)">Далее</button>
-    </div>
-
-    <!-- Шаг 5 Комментарий -->
-    <div class="step" id="s5">
-      <label>Комментарий (опц.)</label>
-      <textarea id="comment" maxlength="280" placeholder="Цвет, пробег, комплектация, приоритеты…"></textarea>
-      <button class="btn" onclick="next(6)">Далее</button>
-    </div>
-
-    <!-- Шаг 6 Контакт -->
-    <div class="step" id="s6">
-      <p class="result">В диапазоне <b id="budgetText"></b> найдётся 12–18 авто. Менеджер свяжется в течение дня.</p>
-      <label>Имя</label>
-      <input type="text" id="name" placeholder="Иван">
-      <label>Контакт (Telegram / WhatsApp)</label>
-      <input type="text" id="contact" placeholder="@ivan или +375...">
-      <div class="checkbox">
-        <input type="checkbox" id="agree" checked>
-        <label for="agree">Согласен на обработку данных</label>
-      </div>
-      <button class="btn" onclick="sendLead()">Получить подборку</button>
-      <div id="msg"></div>
-
-      <!-- Кнопки связи -->
-      <div class="social">
-        <a class="btn" style="background:#25D366" href="https://wa.me/375298299727" target="_blank">WhatsApp</a>
-        <a class="btn" style="background:#0088cc" href="https://t.me/Sergeq1995" target="_blank">Telegram ЛС</a>
-        <a class="btn" style="background:#7360F2" href="viber://chat?number=%2B375298299727" target="_blank">Viber</a>
-        <a class="btn" style="background:var(--accent)" href="https://t.me/vezooauto" target="_blank">Канал: 200+ авто</a>
-      </div>
-
-      <ul>
-        <li>Доставка в Минск: Китай $4 460 / Корея $4 300</li>
-        <li>Без скрытых комиссий</li>
-        <li>30–60 дней «под ключ»</li>
-      </ul>
-    </div>
+<div class="quiz">
+  <div class="logo">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'%3E%3Crect width='42' height='42' rx='8' fill='%23e4002b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-size='22' font-weight='700'%3EV%3C/text%3E%3C/svg%3E" alt="VezooAuto">
+    <span>VezooAuto</span>
   </div>
+  
+  <div id="progress"></div>
+  
+  <!-- Шаг 1: Марка/модель -->
+  <div class="step active" id="s1">
+    <label>Марка и модель авто</label>
+    <input type="text" id="car" placeholder="Toyota Camry, Kia Sportage">
+    <button class="btn" onclick="next(1)">Далее</button>
+  </div>
+  
+  <!-- Шаг 2: Бюджет -->
+  <div class="step" id="s2">
+    <label>Бюджет, $</label>
+    <div class="radio-group">
+      <input type="radio" name="budget" value="10-15" id="b1"><label for="b1">10–15k</label>
+      <input type="radio" name="budget" value="15-20" id="b2"><label for="b2">15–20k</label>
+      <input type="radio" name="budget" value="20-25" id="b3"><label for="b3">20–25k</label>
+      <input type="radio" name="budget" value="25-30" id="b4"><label for="b4">25–30k</label>
+      <input type="radio" name="budget" value="30+" id="b5" checked><label for="b5">Свыше 30k</label>
+    </div>
+    <button class="btn" onclick="next(2)">Далее</button>
+  </div>
+  
+  <!-- Шаг 3: Контакт -->
+  <div class="step" id="s3">
+    <label>Номер телефона</label>
+    <input type="tel" id="phone" placeholder="+375291234567">
+    <label>Есть мессенджеры:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" value="WhatsApp" checked> WhatsApp</label>
+      <label><input type="checkbox" value="Telegram"> Telegram</label>
+      <label><input type="checkbox" value="Viber"> Viber</label>
+    </div>
+    <button class="btn" onclick="sendLead()">Получить подборку</button>
+    <div id="msg"></div>
+  </div>
+</div>
 
 <script>
-/* ========= НАСТРОЙКИ ========= */
-const TOKEN   = '7711504618:AAFIMzbrwJfV4If7os9bT671uuV1O-s25mg';   // ← ваш токен
-const CHAT_ID = '231399891';   // ← ваш chat_id
-let EUR_USD = 1.08;          // fallback, потом живой
+// Настройки
+const TOKEN = 'ВАШ_BOT_TOKEN';   // <- вставьте токен Telegram бота
+const CHAT_ID = 'ВАШ_CHAT_ID';   // <- вставьте chat_id
+const $ = s => document.querySelector(s);
+let data = {};
 
-/* ===== живой курс € → $ (НБРБ) ===== */
-fetch('https://www.nbrb.by/api/exrates/rates/978?parammode=2')
-  .then(r=>r.json()).then(d=>EUR_USD=d.Cur_OfficialRate).catch(()=>console.log('курс не загружен, используем 1.08'));
+// Автофокус Enter
+window.addEventListener('DOMContentLoaded',()=>{
+  const first = $('#car'); first.focus();
+  first.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){ e.preventDefault(); next(1); }
+  });
+});
 
-/* ===== Google Таблица ===== */
-const GOOGLE_URL = 'https://script.google.com/macros/s/AKfycb.../exec'; // ← вставь свой URL Apps Script
+// Прогресс
+function updateProgress(step){ $('#progress').style.width = (step/3*100)+'%'; }
 
-/* ===== UI ===== */
-const $=s=>document.querySelector(s);
-let data={};
-
+// Переход между шагами
 function next(step){
-  if(step===1) data.car=$('#car').value.trim();
-  if(step===2) data.body=$('input[name=body]:checked').value;
-  if(step===3) data.year=+$('#year').value||2015;
-  if(step===4){ data.budget=$('input[name=budget]:checked').value; setBudgetText(); }
-  if(step===5) data.comment=$('#comment').value.slice(0,280);
+  if(step===1) data.car = $('#car').value.trim();
+  if(step===2) data.budget = $('input[name=budget]:checked').value;
   $(`#s${step}`).classList.remove('active');
   $(`#s${step+1}`).classList.add('active');
-}
-function setBudgetText(){
-  const map={['10-15']:'$10–15k',['15-20']:'$15–20k',['20-25']:'$20–25k',['25-30']:'$25–30k',['30+']:'свыше $30k'};
-  $('#budgetText').textContent=map[data.budget]||'';
+  if(step<3) updateProgress(step+1);
+  const input = $(`#s${step+1} input`);
+  if(input) input.focus();
 }
 
-/* ===== ОТПРАВКА ===== */
+// Отправка в Telegram
 async function sendLead(){
-  const name=$('#name').value.trim();
-  const contact=$('#contact').value.trim();
-  if(!name||!contact) return flash('Укажите имя и контакт','error');
-  if(!$('#agree').checked) return flash('Необходимо согласие','error');
-
-  const text=`🚗 Новая заявка VezooAuto
-Имя: ${name}
-Контакт: ${contact}
+  const phone = $('#phone').value.trim();
+  if(!phone) return flash('Введите номер телефона','error');
+  const messengers = Array.from(document.querySelectorAll('.checkbox-group input:checked'))
+    .map(i=>i.value).join(', ') || 'не указано';
+  const text = `🚗 Новая заявка VezooAuto
 Авто: ${data.car}
-Кузов: ${data.body}
-Год от: ${data.year}
 Бюджет: ${data.budget}
-Комментарий: ${data.comment||'—'}`;
-
-  // Telegram
-  await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({chat_id:CHAT_ID,text})
-  }).then(r=>r.json()).then(r=>{
-    if(r.ok) flash('Заявка отправлена! Менеджер свяжется в течение дня.','ok');
-    else flash('Ошибка Telegram','error');
-  }).catch(e=>flash('Ошибка сети','error'));
-
-  // Google Таблица
-  await fetch(GOOGLE_URL,{
-    method:'POST',
-    body:JSON.stringify({
-      name:name,
-      contact:contact,
-      car:data.car,
-      body:data.body,
-      year:data.year,
-      budget:data.budget,
-      comment:data.comment||'',
-      timestamp:new Date().toLocaleString('ru')
-    }),
-    headers:{'Content-Type':'application/json'}
-  });
+Телефон: ${phone}
+Мессенджеры: ${messengers}`;
+  try{
+    const res = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:CHAT_ID,text})
+    });
+    const json = await res.json();
+    if(json.ok){ flash('Заявка отправлена! Менеджер свяжется.','ok'); }
+    else{ flash('Ошибка Telegram','error'); }
+  }catch(e){ flash('Ошибка сети','error'); }
 }
+
+// Flash уведомления
 function flash(msg,type){
-  const m=$('#msg'); m.textContent=msg; m.className=type;
+  const m = $('#msg'); m.textContent = msg; m.className = type;
 }
 </script>
 </body>
